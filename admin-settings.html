@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <title>الإعدادات - لوحة التحكم</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="admin-settings">
+    <div class="admin" style="position:relative;transform:none;">
+        <div class="admin-hd"><h2><i class="fa-solid fa-gear"></i>لوحة الإدارة</h2><a href="admin-dashboard.html" class="admin-close"><i class="fa-solid fa-xmark"></i></a></div>
+        <div class="atabs" style="position:sticky;top:0;z-index:20;">
+            <a href="admin-reports.html" class="atab"><i class="fa-solid fa-chart-simple" style="margin-left:3px"></i>التقارير</a>
+            <a href="admin-products.html" class="atab"><i class="fa-solid fa-box-open" style="margin-left:3px"></i>المنتجات</a>
+            <a href="admin-orders.html" class="atab"><i class="fa-solid fa-receipt" style="margin-left:3px"></i>الطلبات</a>
+            <a href="admin-users.html" class="atab"><i class="fa-solid fa-users" style="margin-left:3px"></i>العملاء</a>
+            <a href="admin-settings.html" class="atab on"><i class="fa-solid fa-sliders" style="margin-left:3px"></i>الإعدادات</a>
+        </div>
+        <div class="abody" id="aBody"></div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+    <div class="sheet" id="sheet"><div class="sheet-handle"></div><div id="sheetCont"></div></div>
+    <div class="toast-wrap" id="toastWrap"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

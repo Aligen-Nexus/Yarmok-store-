@@ -1,0 +1,60 @@
+<div class="top-strip"><span class="marquee" id="topMarquee"></span></div>
+<header>
+    <div class="logo-box">
+        <img src="https://i.ibb.co/C3YFp0k7/688339f4-1296-48c0-bc66-3be039832675.png" alt="الشعار" id="mainLogo">
+        <div class="brand"><h1 id="mainName">اليرموك الحديث</h1><small>أصالة التفصيل وفخامة المظهر</small></div>
+    </div>
+    <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInp" placeholder="ابحث عن منتج..." oninput="doSearch(this.value)"></div>
+    <div class="hdr-acts">
+        <button class="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <button class="hbtn" onclick="openLogin()" style="color:var(--gold)"><i class="fa-solid fa-gear"></i></button>
+    </div>
+</header>
+
+<!-- لوحة الإدارة المنبثقة (للصفحة الرئيسية فقط) -->
+<div class="admin" id="adminP">
+    <div class="admin-hd"><h2><i class="fa-solid fa-gear"></i>لوحة الإدارة</h2><button class="admin-close" onclick="closeAdmin()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="atabs" id="aTabs">
+        <button class="atab on" data-at="a-rpt" onclick="swAT('a-rpt',this)"><i class="fa-solid fa-chart-simple" style="margin-left:3px"></i>التقارير</button>
+        <button class="atab" data-at="a-prod" onclick="swAT('a-prod',this)"><i class="fa-solid fa-box-open" style="margin-left:3px"></i>المنتجات</button>
+        <button class="atab" data-at="a-ord" onclick="swAT('a-ord',this)"><i class="fa-solid fa-receipt" style="margin-left:3px"></i>الطلبات</button>
+        <button class="atab" data-at="a-cli" onclick="swAT('a-cli',this)"><i class="fa-solid fa-users" style="margin-left:3px"></i>العملاء</button>
+        <button class="atab" data-at="a-set" onclick="swAT('a-set',this)"><i class="fa-solid fa-sliders" style="margin-left:3px"></i>الإعدادات</button>
+    </div>
+    <div class="abody" id="aBody"></div>
+</div>
+
+<!-- مودال تسجيل الدخول -->
+<div class="overlay" id="loginOvl"></div>
+<div class="login-card" id="loginCard">
+    <div class="login-icon"><i class="fa-solid fa-lock"></i></div>
+    <h3 style="font-size:17px;font-weight:900;color:var(--brn);margin-bottom:4px">الدخول للإدارة</h3>
+    <p style="font-size:11px;color:var(--t3);margin-bottom:18px">منطقة خاصة بالمدير</p>
+    <div class="fld" style="margin-bottom:14px"><i class="fa-solid fa-key ic"></i><input type="password" id="aPass" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="abtn g full" onclick="doLogin()" style="padding:13px;font-size:13px"><i class="fa-solid fa-sign-in-alt"></i>دخول</button>
+    <button onclick="closeLogin()" style="width:100%;padding:10px;font-size:12px;color:var(--t3);margin-top:8px">إلغاء</button>
+</div>
+
+<!-- ياقوت المساعد الذكي -->
+<button class="y-btn" id="yBtn" onclick="toggleY()"><i class="fa-solid fa-gem"></i></button>
+<div class="y-panel" id="yPanel">
+    <div class="y-head"><span><i class="fa-solid fa-gem" style="margin-left:6px"></i>ياقوت</span><button onclick="toggleY()" style="color:var(--gold);font-size:16px"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="y-body" id="yBody">
+        <div class="y-msg bot"><div class="bubble">أهلاً بك في اليرموك! أنا ياقوت، مساعدك الذكي. كيف أقدر أساعدك؟</div></div>
+        <div class="y-msg bot"><div class="y-qs">
+            <button onclick="yAsk('صيفي')">أقمشة صيفية</button>
+            <button onclick="yAsk('شتوي')">أقمشة شتوية</button>
+            <button onclick="yAsk('مدة')">مدة التنفيذ</button>
+            <button onclick="yAsk('دفع')">طرق الدفع</button>
+            <button onclick="yAsk('مقاس')">المقاسات</button>
+        </div></div>
+    </div>
+    <div class="y-input"><input type="text" id="yInp" placeholder="اسأل ياقوت..." onkeydown="if(event.key==='Enter')sendY()"><button onclick="sendY()"><i class="fa-solid fa-paper-plane"></i></button></div>
+</div>
+
+<!-- المودال والأوفرلاي -->
+<div class="overlay" id="overlay" onclick="closeModal()"></div>
+<div class="sheet" id="sheet"><div class="sheet-handle"></div><div id="sheetCont"></div></div>
+
+<!-- التوست -->
+<div class="toast-wrap" id="toastWrap"></div>

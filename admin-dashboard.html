@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <title>لوحة التحكم - اليرموك الحديث</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="admin-dashboard">
+    <div id="navbar"></div>
+    <div class="admin" style="position:relative;transform:none;">
+        <div class="admin-hd"><h2><i class="fa-solid fa-gear"></i>لوحة الإدارة</h2><a href="index.html" class="admin-close"><i class="fa-solid fa-xmark"></i></a></div>
+        <div class="atabs" style="position:sticky;top:0;z-index:20;">
+            <a href="admin-reports.html" class="atab"><i class="fa-solid fa-chart-simple" style="margin-left:3px"></i>التقارير</a>
+            <a href="admin-products.html" class="atab"><i class="fa-solid fa-box-open" style="margin-left:3px"></i>المنتجات</a>
+            <a href="admin-orders.html" class="atab"><i class="fa-solid fa-receipt" style="margin-left:3px"></i>الطلبات</a>
+            <a href="admin-users.html" class="atab"><i class="fa-solid fa-users" style="margin-left:3px"></i>العملاء</a>
+            <a href="admin-settings.html" class="atab"><i class="fa-solid fa-sliders" style="margin-left:3px"></i>الإعدادات</a>
+        </div>
+        <div class="abody">
+            <div style="text-align:center; padding: 40px 20px; color: var(--t3);">
+                <i class="fa-solid fa-tachometer-alt" style="font-size: 40px; color: var(--gold); margin-bottom: 15px; display:block;"></i>
+                <h3 style="color: var(--brn); margin-bottom: 10px;">مرحباً بك في لوحة التحكم</h3>
+                <p>اختر أحد الأقسام من القائمة أعلاه للبدء.</p>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

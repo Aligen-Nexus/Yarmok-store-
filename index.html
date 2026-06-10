@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <title>اليرموك الحديث</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+
+    <div id="navbar"></div>
+
+    <div class="main">
+        <!-- قسم الرئيسية -->
+        <div id="sec_home" class="sec on">
+            <div class="hero afu"><div class="hero-particles" id="heroParticles"></div><div class="hero-content"><h2>إرث الوالد<br>في كل تفصيلة</h2><p>أزياء يمنية أصيلة بلمسة عصرية تجمع بين الحرفية اليدوية وأجود الأقمشة</p><div class="hero-btns"><button class="hero-btn prim" onclick="swTab('tailor')"><i class="fa-solid fa-scissors"></i>اطلب تفصيل</button><button class="hero-btn sec" onclick="swTab('ready')"><i class="fa-solid fa-shirt"></i>الجاهزة</button></div></div></div>
+            <div class="info-cards afu" style="animation-delay:.08s">
+                <div class="info-c" onclick="swTab('tailor')"><i class="fa-solid fa-scissors"></i><h4>تفصيل</h4><span>أقمشة فاخرة</span></div>
+                <div class="info-c" onclick="swTab('ready')"><i class="fa-solid fa-shirt"></i><h4>جاهز</h4><span>تشكيلة متنوعة</span></div>
+                <div class="info-c" onclick="swTab('account')"><i class="fa-solid fa-magnifying-glass-location"></i><h4>تتبع</h4><span>طلبك هنا</span></div>
+            </div>
+            <div id="pagesDisp"></div>
+        </div>
+
+        <!-- قسم التفصيل -->
+        <div id="sec_tailor" class="sec">
+            <div class="fgrid afu"><div class="fld"><i class="fa-solid fa-user ic"></i><input type="text" id="cName" placeholder="الاسم الكامل"><span class="auto-tag" id="nameTag">تلقائي</span></div><div class="fld"><i class="fa-solid fa-phone ic"></i><input type="tel" id="cPhone" placeholder="رقم الهاتف" oninput="searchClient(this.value)"><span class="auto-tag" id="phoneTag">تلقائي</span></div></div>
+            <div class="mcard afu" style="animation-delay:.05s"><h4><i class="fa-solid fa-ruler-combined"></i> مقاساتك بالإنش</h4><div class="mgrid" id="szGrid"></div><div class="sz-progress"><span id="szCount">0 / 0</span><div class="sz-bar"><div class="sz-bar-fill" id="szBar"></div></div></div></div>
+            <div class="mcard afu" style="animation-delay:.1s"><h4><i class="fa-solid fa-wand-magic-sparkles"></i> تفاصيل الخياطة</h4><div id="tailorOpts"></div></div>
+            <div class="sec-hd afu" style="animation-delay:.15s"><h3>الأقمشة المتاحة</h3><small id="fabCount"></small></div>
+            <div id="fabGrid" class="pgrid afu" style="animation-delay:.2s"></div>
+        </div>
+
+        <!-- قسم الجاهز -->
+        <div id="sec_ready" class="sec">
+            <div class="fgrid afu"><div class="fld"><i class="fa-solid fa-user ic"></i><input type="text" id="cName2" placeholder="الاسم الكامل"></div><div class="fld"><i class="fa-solid fa-phone ic"></i><input type="tel" id="cPhone2" placeholder="رقم الهاتف"></div></div>
+            <div id="readyFilter" class="filter-row"></div>
+            <div class="sec-hd afu"><h3>الملابس الجاهزة</h3><small id="rdyCount"></small></div>
+            <div id="rdyGrid" class="pgrid afu" style="animation-delay:.1s"></div>
+        </div>
+
+        <!-- قسم الحساب والسلة -->
+        <div id="sec_account" class="sec">
+            <div class="sec-hd"><h3>تتبع طلبك</h3></div>
+            <div class="track-box"><input type="tel" id="trackPhone" placeholder="أدخل رقم هاتفك" maxlength="15" onkeydown="if(event.key==='Enter')trackOrder()"><button class="abtn g full" onclick="trackOrder()" style="margin-bottom:6px"><i class="fa-solid fa-magnifying-glass"></i> بحث</button><div id="trackRes"></div></div>
+            <div class="sec-hd" style="margin-top:20px"><h3>سلة المشتريات</h3></div>
+            <div id="cartList"><div class="empty"><i class="fa-solid fa-bag-shopping"></i><p>السلة فارغة</p></div></div>
+            <div id="cartPay" style="display:none">
+                <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;margin-bottom:16px">
+                    <div style="font-size:13px;font-weight:700;color:var(--brn);margin-bottom:12px"><i class="fa-solid fa-credit-card" style="margin-left:6px;color:var(--gold)"></i>طريقة الدفع</div>
+                    <div class="pay-grid" id="payGrid"></div>
+                    <div id="payDet" style="display:none;margin-top:14px">
+                        <div class="af" style="margin-bottom:10px"><label>ملاحظاتك</label><textarea id="orderNotes" rows="2" placeholder="ملاحظاتك..." style="width:100%;padding:10px 14px;border:1.5px solid var(--bdr);border-radius:var(--r);font-size:12px;background:var(--bg2);color:var(--t1);resize:none"></textarea></div>
+                        <div style="background:rgba(201,168,76,.06);padding:14px;border-radius:var(--r);border:1px dashed var(--gold);text-align:center">
+                            <small style="color:var(--t3)">حوّل للمستلم:</small>
+                            <div id="accNum" style="font-size:18px;font-weight:900;color:var(--brn);margin:6px 0;cursor:pointer;letter-spacing:1px" onclick="navigator.clipboard.writeText(this.textContent);toast('تم نسخ الرقم','ok')">-</div>
+                            <label style="display:inline-flex;align-items:center;gap:5px;padding:8px 16px;background:var(--brn);color:var(--goldL);border-radius:50px;font-size:10px;font-weight:700;cursor:pointer"><i class="fa-solid fa-camera"></i>رفع إيصال<input type="file" accept="image/*" onchange="prevRcpt(this)" style="display:none"></label>
+                            <img id="rcptPrev" style="display:none;max-width:180px;border-radius:var(--rs);border:2px solid var(--gold);margin-top:8px">
+                        </div>
+                    </div>
+                </div>
+                <button class="send-btn" onclick="sendOrder()" style="margin-top:10px"><i class="fa-solid fa-paper-plane"></i> إرسال الطلب عبر واتساب</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-bar hidden" id="cartBar">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:12px;font-weight:700;color:var(--t2)"><i class="fa-solid fa-bag-shopping" style="margin-left:4px"></i>السلة (<span id="cartCnt">0</span>)</span>
+            <span style="font-size:20px;font-weight:900;color:var(--gn)"><span id="totalPrice">0</span> <small style="font-size:12px;font-weight:400">ر.ي</small></span>
+        </div>
+        <button class="send-btn" onclick="swTab('account')"><i class="fa-solid fa-arrow-left"></i> عرض السلة والمتابعة</button>
+    </div>
+
+    <nav class="bnav">
+        <div class="bnav-item on" data-t="home" onclick="swTab('home')"><i class="fa-solid fa-home"></i><span>الرئيسية</span></div>
+        <div class="bnav-item" data-t="tailor" onclick="swTab('tailor')"><i class="fa-solid fa-scissors"></i><span>تفصيل</span></div>
+        <div class="bnav-item" data-t="ready" onclick="swTab('ready')"><i class="fa-solid fa-shirt"></i><span>جاهز</span></div>
+        <div class="bnav-item" data-t="account" onclick="swTab('account')"><i class="fa-solid fa-user"></i><span>حسابي</span></div>
+    </nav>
+
+    <div id="footer"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
